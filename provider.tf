@@ -13,7 +13,7 @@ terraform {
   }
   backend "s3" {                                  ### backend ###
     bucket = "testk8s011"
-    key = "your-bucket-key"
+    key = "k8s/terraform.tfstate"
  } 
 }
 
