@@ -12,10 +12,13 @@ terraform {
 
   }
   backend "s3" {                                  ### backend ###
-    bucket = "your-bucket-name"
+    bucket = "testk8s011"
     key = "your-bucket-key"
  } 
 }
 
 provider "aws" {
+  region     = "us-west-1"  # Thay đổi thành vùng bạn muốn sử dụng
+  access_key = "AKIAWQUOZMMBWOK4LXW6"  # Thay đổi thành khóa truy cập của bạn
+  secret_key = "YQnpbrkygagCQqfM+3UhG3Nqbg53TbIPmrqRssRC"  # Thay đổi thành khóa bí mật của bạn
 }
