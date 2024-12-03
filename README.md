@@ -1,34 +1,107 @@
+# Micorservice Project
 
-# **Automating Kubeadm cluster on AWS EC2: Terraform, Ansible, and GitHub Actions**
+Đây là một dự án MICROservices bao gồm các service sau:
+- **API GATEWAY**
+- **PRODUCT SERVICE**
+- **INVENTORY SERVICE**
+- **ORDER SERVICE**
+- **IDENTITY SERVICE**
+- **NOTIFICATION SERVICE**
+
+## YÊU CẦU HỆ THỐNG
+
+- **JAVA 21**
+- **DOCKER**
+- **DOCKER COMPOSE**
+- **MAVEN**
+
+## HƯỚNG DẪN CÀI ĐẶT VÀ CHẠY
+
+1. **CLONE REPOSITORY VỀ MÁY LOCAL:**
+
+   ```bash
+   git clone <repository_url>
+   cd <project_folder>
+   ```
+
+2. **CHẠY DOCKER COMPOSE ĐỂ KHỞI ĐỘNG CÁC CONTAINER CẦN THIẾT:**
+
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **CHẠY TỪNG SERVICE:**
+
+   Đối với mỗi service (api-gateway, product-service, inventory-service, order-service, identity-service, notification-service), thực hiện các bước sau:
+
+   ```bash
+   cd <service_folder>
+   mvn spring-boot:run
+   ```
+
+4. **TRUY CẬP API GATEWAY:**
+
+   API Gateway sẽ chạy tại `http://localhost:8080` (hoặc port được cấu hình).
+
+## CẤU TRÚC PROJECT
+
+- `api-gateway`: **API GATEWAY SERVICE**
+- `product-service`: **QUẢN LÝ SẢN PHẨM**
+- `inventory-service`: **QUẢN LÝ KHO HÀNG**
+- `order-service`: **QUẢN LÝ ĐƠN HÀNG**
+- `identity-service`: **XÁC THỰC VÀ PHÂN QUYỀN**
+- `notification-service`: **GỬI THÔNG BÁO**
+
+## FRONTEND
+
+Frontend được phát triển bằng **REACT**. Để chạy frontend:
+``` bash
+cd frontend
+npm install
+npm start
+```
+
+## CÀI ĐẶT BẰNG K8S
+
+1. **CHẠY CÁC CONTAINER CẦN THIẾT CHO ỨNG DỤNG:**
+
+   Chạy các container cần thiết bằng câu lệnh sau:
+   ``` bash
+   cd k8s
+   kubectl apply -f infrastructure
+   ```
+   Đợi cho các container này hoàn thành chạy (trạng thái running)
+   
+   Kiểm tra bằng câu lệnh:
+   ``` bash
+   kubectl get pods
+   ```
+
+2. **CHẠY CÁC SERVICE APPLICATION:**
+
+   ``` bash
+   kubectl apply -f applications
+   ```
+
+3. **CHẠY NGINX INGRESS CONTROLLER:**
+
+   ``` bash
+   minikube addons enable ingress
+   kubectl apply -f ingress
+   ```
+   
+   Chạy lệnh để lấy ip của minikube :
+   
+   ``` bash
+   kubectl get ingress 
+   ```
+   
+   Thêm vào file /etc/hosts:
+   
+   ``` bash
+   <minikube ip> itshop.k8s
+   <minikube ip> api.itshop.k8s
+   ```
 
 
-
-![image](https://github.com/Chenwingu/kubeadm-ec2-automate/blob/main/kubeadm-k8s-cluster.png)
-
-# **Introduction**
-
-Integrating Terraform and Ansible provides a powerful solution for infrastructure provisioning and management, enabling us to automate everything from hardware deployment to software installation.
-
-
-# **Prerequisites**
-
-**Local machine setup: Install and configure Git, Terraform, Ansible, and vscode.**
-
-**IAM Role: Create a role in AWS IAM, with necessary permissions and access the role via secrets.AWS_ROLE construct.**
-
-**GitHub repository secrets: You need to configure valid credentials.**
-
-**Project structure: Arrange your project directories and files.**
-
-
-# **Walk through** 
-
-Add **ansible_host resource** in your terraform configurations as outlined [here](https://github.com/Chenwingu/kubeadm-ec2-automate/blob/main/cluster.tf)! 
-
-Terraform and Ansible have to work together to generate the **inventory file**. Use this [workflows](https://github.com/Chenwingu/kubeadm-ec2-automate/blob/main/.github/workflows/kubernetes.yml) as a guide.
-
-This **inventory file** can be generate with some available **plugins** or alternatively with Terraform's **templatefile** function.
-
-
-Check out the sample project tutorial in the [Link](https://medium.com/@chenwingu/automating-kubeadm-cluster-on-ec2-terraform-ansible-github-actions-be847ca8e4a2)
 
