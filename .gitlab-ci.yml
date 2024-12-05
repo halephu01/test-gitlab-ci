@@ -18,7 +18,7 @@ sonarqube-check:
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
   tags:
-    - runner2-dev-shell 
+    - runner3-dev-shell 
 
 sonarqube-vulnerability-report:
   stage: sonarqube-vulnerability-report
@@ -28,7 +28,7 @@ sonarqube-vulnerability-report:
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
   tags:
-    - runner2-dev-shell 
+    - runner3-dev-shell 
 
 dependency-check:
   stage: dependency-check
@@ -38,7 +38,7 @@ dependency-check:
   rules:
     - if: $CI_COMMIT_BRANCH == 'main'
   tags:
-    - runner2-dev-shell 
+    - runner3-dev-shell 
   artifacts:
     expire_in: 1 day
     reports:
