@@ -136,6 +136,23 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<!-- Plugin OWASP Dependency-Check -->
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>8.4.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<format>HTML</format> 
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
